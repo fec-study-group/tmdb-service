@@ -1,14 +1,23 @@
 const express = require('express');
 const app = express();
+const axios = require('axios');
 const port = 3000;
+require('dotenv').config();
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function(req, res) {
   res.send('tmdb service');
 });
 
-app.get('/auth', function(req, res) {
-    res.send('auth page');
+app.get('/movie/:id', function(req, res) {
+    axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${process.env.TMDB_API_KEY}`)
+    .then(function (response) {
+        res.send(response.data);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
 });
 
 app.get('/logout', function(req, res) {
