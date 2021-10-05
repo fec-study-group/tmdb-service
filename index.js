@@ -30,6 +30,12 @@ app.get('/login', function(req, res) {
   
 
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+module.exports = app;
+
+listen();
+
+function listen() {
+  if (app.get('env') === 'test') return;
+  app.listen(port);
+  console.log('Express app started on port ' + port);
+}
