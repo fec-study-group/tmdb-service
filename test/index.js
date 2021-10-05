@@ -12,7 +12,7 @@ describe('Test demo', () => {
         it('GET /', (done) => {
 
             chai.request(app)
-                .get('/nonExists')
+                .get('/')
                 .end(function(err, res){
 
                     if (err) done(err)
